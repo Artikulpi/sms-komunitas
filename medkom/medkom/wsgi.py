@@ -15,8 +15,8 @@ framework.
 """
 import os, sys
 
-sys.path.append('/home/angkringan/lib/djangoenv/lib/python2.7/site-packages')
-sys.path.append('/home/angkringan/medkom')
+sys.path.append('')
+sys.path.append('')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "medkom.settings")
 
