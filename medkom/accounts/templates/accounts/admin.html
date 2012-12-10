@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Administrasi Pengguna{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="span5">
+            <h4>Administrasi Pengguna</h4>
+        </div>
+        
+        <div class="span5">
+            <a href="new/" class="btn btn-primary pull-right">
+                Tambah
+            </a>
+        </div>
+    </div> <!-- row -->
+    
+    <div class="row">
+        <div class="span2">
+            <div class="sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">
+                        <i class="icon-tags"></i>
+                        Kategori
+                    </li>
+                    <li><a href="./?q=all">Semua</a></li>
+                    <li><a href="./?q=active">Aktif</a></li>
+                    <li><a href="./?q=inactive">Tidak Aktif</a></li>
+                    <li><a href="./?q=admin">Admin</a></li>
+                    <li><a href="./?q=staff">Staff</a></li>
+                    <li><a href="./?q=user">Penguna</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="span8">
+
+            <table class="table table-bordered table-striped">
+                <colgroup>
+                    <col class="span1">
+                    <col class="span1">
+                    <col class="span2">
+                    <col class="span1">
+                    <col class="span1">
+                    <col class="span1">
+                    <col class="span1">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Pengguna</th>
+                        <th>Nama Lengkap</th>
+                        <th>Email</th>
+                        <th>Peran</th>
+                        <th>Aktif?</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if users %}
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% if user.is_superuser %}
+                                        Admin
+                                    {% elif user.is_staff %}
+                                        Staff
+                                    {% else %}
+                                        Pelanggan
+                                    {% endif %}
+                                </td>
+                                <td>{{ user.is_active }}</td>
+                                <td>
+                                    <a href="{{ user.id }}/"
+                                        class="label label-info">
+                                        <i class="icon-ok icon-white"></i>
+                                        <i class="icon-remove icon-white"></i>
+                                        <i class="icon-zoom-in icon-white"></i>
+                                    </a></td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+
+        </div>
+        
+    </div><!-- row -->
+{% endblock %}

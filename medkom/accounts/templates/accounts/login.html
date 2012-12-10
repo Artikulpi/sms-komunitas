@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Log in - Media Komunitas 160 K</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Media komunitas 160 karakter">
+        <meta name="author" content="Akhmat Safrudin">
+        
+        <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+        <style type="text/css">
+            body {
+                padding-top: 40px;
+                padding-bottom: 40px;
+                background-color: #f5f5f5;
+            }
+            
+            .form-signin {
+                max-width: 310px;
+                padding: 19px 39px 29px;
+                margin: 0 auto 20px;
+                background-color: #fff;
+                border: 1px solid #e5e5e5;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            }
+            
+            .form-signin .form-signin-heading,
+            .form-signin .checkbox {
+                margin-bottom: 20px;
+            }
+            
+            .form-signin input[type="text"],
+            .form-signin input[type="password"] {
+                font-size: 16px;
+                height: auto;
+                margin-bottom: 15px;
+                padding: 7px 9px;
+            }
+        </style>
+        <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        
+        <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144"
+            href="{{ STATIC_URL }}ico/apple-touch-icon-144.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114"
+            href="{{ STATIC_URL }}ico/apple-touch-icon-114.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72"
+            href="{{ STATIC_URL }}ico/apple-touch-icon-72.png">
+        <link rel="apple-touch-icon-precomposed"
+            href="{{ STATIC_URL }}ico/apple-touch-icon-57.png">
+    </head>
+    
+    <body>
+        <div class="container">
+            
+            <form method="post" class="form-signin action="{% url django.contrib.auth.views.login %}">
+                {% if form.errors %}
+                    <div class="alert alert-error">
+                        Your username and password didn't match. Please try again.
+                    </div>
+                {% endif %}
+                
+                {% csrf_token %}
+                <h2 class="form-signin-heading">Media Komunitas 160</h2>
+                {{ form.username }}
+                {{ form.password }}
+                <button class="btn btn-large btn-primary" type="submit">Log in</button>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+        </div> <!-- /container -->
+        
+        <script src="{{ STATIC_URL }}js/jquery.js"></script>
+        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+        
+        <script type="text/javascript">
+            $('#id_username').attr('class', 'input-block-level');
+            $('#id_username').attr('placeholder', 'Nama Pengguna');
+            $('#id_password').attr('class', 'input-block-level');
+            $('#id_password').attr('placeholder', 'Password');
+        </script>
+        
+  </body>
+</html>

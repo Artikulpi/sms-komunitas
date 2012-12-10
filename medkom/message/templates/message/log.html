@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Lihat log pesan{% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="span5">
+        <h4>Log pengiriman pesan</h4>
+    </div>
+    <div class="span5">
+        <div class="pagination pull-right custom-pagination">
+            <ul>
+                <li class="disabled">
+                    <a href="#">
+                        Page {{ sentitems.number }} of
+                        {{ sentitems.paginator.num_pages }}
+                    </a>
+                </li>
+                {% if sentitems.has_previous %}
+                    <li>
+                        <a href="?page=1">
+                            <i class="icon-fast-backward"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?page={{ sentitems.previous_page_number }}">
+                        <i class="icon-backward"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                
+                <li class="active"><a href="#">{{ sentitems.number }}</a></li>
+                
+                {% if sentitems.has_next %}
+                    <li>
+                        <a href="?page={{ sentitems.next_page_number }}">
+                            <i class="icon-forward"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?page={{ sentitems.paginator.num_pages }}">
+                            <i class="icon-fast-forward"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div><!-- Paginator -->
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="span10">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Pesan</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in sentitems %}
+                    <tr>
+                        <td>
+                            <div class="item-header">
+                                <strong>{{ item.DestinationNumber }}</strong>
+                            </div>
+                            <div class="item-content">
+                                {{ item.TextDecoded }}
+                            </div>
+                            <div class="item-footer">
+                                <small>{{ item.SendingDateTime }}</small>
+                            </div>
+                        </td>
+                        <td>{{ item.Status }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

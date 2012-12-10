@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Profil{% endblock %}
+{% block body %}
+
+<h2>Profil Pengguna</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Nama Pengguna</th>
+        <td>{{ user.username }}</td>
+    </tr>
+    <tr>
+        <th>Nama Lengkap</th>
+        <td>{{ user.first_name }} {{ user.last_name }}</td>
+    </tr>
+    <tr>
+        <th>Alamat Surel</th>
+        <td>{{ user.email }}</td>
+    </tr>
+</table>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+.custom-pagination {
+    margin: 0;
+}
+
+.tr-mouse-over {
+    cursor: pointer;
+}
+
+.tr-mouse-out {
+    cursor: default;
+}
+
+.item-header {
+    color: #333;
+}
+
+.item-footer {
+    color: #999;
+}
+
+thead tr th {
+    background-color: #F1F1F1;
+    background-image: -ms-linear-gradient(top,#F9F9F9,#ECECEC);
+    background-image: -moz-linear-gradient(top,#F9F9F9,#ECECEC);
+    background-image: -o-linear-gradient(top,#F9F9F9,#ECECEC);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#F9F9F9),to(#ECECEC));
+    background-image: -webkit-linear-gradient(top,#F9F9F9,#ECECEC);
+    background-image: linear-gradient(top,#F9F9F9,#ECECEC);
+}
+
+.mkform {
+    margin: 7px 0 0 0;
+}

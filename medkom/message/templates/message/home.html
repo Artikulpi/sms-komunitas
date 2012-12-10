@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}Selamat Datang{% endblock %}
+{% block body %}
+    
+    <div class="row">
+        <div class="span5" style="margin-top: 5px">
+            <form method="post" style="margin: 0">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {{ form.queue.errors }}
+                {{ form.queue }}
+                
+                <button type="submit" class="btn"
+                    onclick="return confirmDelete()">
+                    <i class="icon-remove-circle"></i>
+                    Delete Selected
+                </button>
+            </form>
+        </div>
+        
+        <div class="span5">
+            <div class="pagination pull-right custom-pagination">
+                <ul>
+                    <li class="disabled">
+                        <a href="#">
+                            Page {{ messages.number }} of
+                            {{ messages.paginator.num_pages }}
+                        </a>
+                    </li>
+                    {% if messages.has_previous %}
+                        <li>
+                            <a href="?page=1">
+                                <i class="icon-fast-backward"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page={{ messages.previous_page_number }}">
+                            <i class="icon-backward"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                    
+                    <li class="active"><a href="#">{{ messages.number }}</a></li>
+                    
+                    {% if messages.has_next %}
+                        <li>
+                            <a href="?page={{ messages.next_page_number }}">
+                                <i class="icon-forward"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page={{ messages.paginator.num_pages }}">
+                                <i class="icon-fast-forward"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div><!-- Paginator -->
+        </div>
+    </div>
+    <p></p>
+    <table class="table table-hover" id="content">
+        <thead>
+            <tr>
+                <th style="width: 10px">
+                    <input type="checkbox" onclick="toggleChecked(this.checked)">
+                </th>
+                <th style="font-size: large">
+                    Pesan
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="table-list">
+            {% if messages %}
+                {% load member_tags %}
+                {% load tz %}
+                
+                {% for message in messages %}
+                    <tr onmouseout="this.className='tr-mouse-out'"
+                    onmouseover="this.className='tr-mouse-over'">
+                        <td><input type="checkbox" value={{message.id}}></td>
+                        <td  onclick="redirect('messages/{{ message.id }}')">
+                            <div class="item-header">
+                                <strong>
+                                    {{message.sender}} {{message.sender|mask_sender}}
+                                </strong>
+                            </div>
+                            <div class="item-content">
+                                {{message.message}}
+                            </div>
+                            <div class="item-footer">
+                                <small>
+                                    {{message.date|date:"d-M-Y H:i:s"}}
+                                </small>
+                            </div>
+                        </td>
+                        <td onclick="redirect('messages/{{message.id}}/reply/')">
+                            <i class="icon-share"></i>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">
+                        <p class="alert alert-info">
+                            Tidak ada pesan.
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript">
+        function toggleChecked(status) {
+            $('#table-list input').each(function() {
+                $(this).attr("checked", status);
+                $(this).trigger('change');
+            })
+        }
+        
+        function getSelectValues() {
+            var allVals = [];
+            $("#table-list :checked").each(function() {
+                allVals.push($(this).val());
+            });
+            $("#id_queue").val(allVals);
+        }
+        
+        $(function() {
+            $("#table-list").change(getSelectValues);
+            getSelectValues();
+        });
+        
+        function confirmDelete() {
+            var agree=confirm("Yakin akan menghapus data ini?");
+            if(agree)
+                return true;
+            else
+                return false;
+        }
+        
+        function redirect(page) {
+            location.href=page;
+        }
+        
+        setInterval(function(){
+            $('#content').load(location.href+" #content>*","");
+        }, 300000);
+    </script>
+{% endblock %}

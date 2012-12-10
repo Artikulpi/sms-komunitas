@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Pengaturan Sosial Ekonomi{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="span5">
+            <h4>Pengaturan Sosial Ekonomi</h4>
+        </div>
+        <div class="span5">
+            <a data-toggle="tab" href="#new" class="btn btn-primary pull-right">
+                Tambah
+            </a>
+        </div>
+    </div>
+    
+    <div class="tab-content">
+        <div class="tab-pane {% if not form.errors %}active{% endif %}" id="view">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Kategori</th>
+                        <th colspan="2">Skor</th>
+                    </tr>
+                    <tr>
+                        <th>Dari</th>
+                        <th>Sampai</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if statuses %}
+                        {% for status in statuses %}
+                            <tr onclick="redirect('{{status.id}}')"
+                            onmouseout="this.className='tr-mouse-out'"
+                            onmouseover="this.className='tr-mouse-over'">
+                                <td>{{ status.name }}</td>
+                                <td>{{ status.score_min }}</td>
+                                <td>{{ status.score_max }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="4">
+                                <p class="alert alert-info">
+                                    Belum ada data.
+                                </p>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane {% if form.errors %}active{% endif %}" id="new">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <a href="#view" class="btn" data-toggle="tab">
+                    Batal
+                </a>
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}
+{% block extrajs %}
+    <style>
+        .table thead th {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .table th {
+            padding: 5px;
+        }
+    </style>
+    <script type="text/javascript">
+        function redirect(page) {
+            location.href=page;
+        }
+    </script>
+{% endblock %}

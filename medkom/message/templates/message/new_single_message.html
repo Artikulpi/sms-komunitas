@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Kirim SMS{% endblock %}
+{% block body %}
+    {% load member_tags %}
+    <h4>Kirim SMS</h4>
+    <p>Tujuan : {{ destination }}</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit" class="btn btn-primary">Kirim</button>
+        <a href="{% url home %}" class="btn btn-inverse">Batal</a>
+    </form>
+{% endblock %}
+{% block extrajs %}
+    <style>
+        #id_message {
+            width: 400px;
+        }
+        
+        select {
+            width: 210px;
+        }
+    </style>
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_message').limitCharacters();
+        });
+        $('.errorlist').attr('class', 'alert alert-error');
+    </script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/box.js"></script>
+{% endblock %}

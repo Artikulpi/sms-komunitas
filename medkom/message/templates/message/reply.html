@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Balas SMS{% endblock %}
+{% block body %}
+    {% load member_tags %}
+    <h4>Balas SMS</h4>
+    <div class="well">
+        <div class="item-header" style="font-size: large">
+            <strong>{{ msg.sender }} {{msg.sender|mask_sender}}</strong>
+        </div>
+        <p></p>
+        <div class="item-content" style="font-size: medium">
+            <p>{{ msg.message }}</p>
+        </div>
+        <div class="item-footer">
+            <small>{{msg.date|date:"d-M-Y"}}</small>
+        </div>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit" class="btn btn-primary">Kirim</button>
+        <a href="{% url home %}" class="btn btn-inverse">Batal</a>
+    </form>
+{% endblock %}
+{% block extrajs %}
+    <style>
+        #id_message {
+            width: 400px;
+        }
+        
+        select {
+            width: 210px;
+        }
+    </style>
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_message').limitCharacters();
+        });
+        $('.errorlist').attr('class', 'alert alert-error');
+    </script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/box.js"></script>
+{% endblock %}

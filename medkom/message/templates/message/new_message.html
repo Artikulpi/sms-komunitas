@@ -1,0 +1,415 @@
+{% extends "base.html" %}
+{% block title %}New Message{% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="span10">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            
+            <div class="row">
+                <div class="span10">
+                    {{ form.message.errors }}
+                    {{ form.message }}
+                </div>
+            </div>
+            
+            <p></p>
+            
+            <label>{{ form.external }} {{ form.external.label }}</label>
+            <div class="external">
+                {{ form.extra_phones.errors }}
+                {{ form.extra_phones }}
+                <p class="alert alert-info" style="width: 420px">
+                    Tambahkan beberapa nomoh HP dipisahkan dengan koma.
+                </p>
+            </div>
+            
+            <label>{{ form.member }} {{ form.member.label }}</label>
+            <p></p><br>
+            
+            <div class="row member">
+                <div class="span5">
+                    <div class="accordion" id="choice-member">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member" href="#tema-informasi">
+                                    Tema Informasi
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="tema-informasi">
+                                <div class="accordion-inner">
+                                    {{ form.tema_informasi.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.tema_informasi_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.tema_informasi }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member" href="#hubungan-keluarga">
+                                    Hubungan Keluarga
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="hubungan-keluarga">
+                                <div class="accordion-inner">
+                                    {{ form.hubungan_keluarga.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.hubungan_keluarga_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.hubungan_keluarga }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member" href="#jenis-kelamin">
+                                    Jenis Kelamin
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="jenis-kelamin">
+                                <div class="accordion-inner">
+                                    {{ form.jenis_kelamin.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.jenis_kelamin_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.jenis_kelamin }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member" href="#agama">
+                                    Agama
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="agama">
+                                <div class="accordion-inner">
+                                    {{ form.agama.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.agama_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.agama }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member" href="#organisasi">
+                                    Organisasi
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="organisasi">
+                                <div class="accordion-inner">
+                                    {{ form.organisasi.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.organisasi_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.organisasi }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member" href="#jenis-usaha">
+                                    Jenis Usaha
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="jenis-usaha">
+                                <div class="accordion-inner">
+                                    {{ form.jenis_usaha.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.jenis_usaha_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.jenis_usaha }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member" href="#keahlian">
+                                    Keahlian
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="keahlian">
+                                <div class="accordion-inner">
+                                    {{ form.keahlian.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.keahlian_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.keahlian }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member" href="#pendidikan-terakhir">
+                                    Pendidikan Terakhir
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="pendidikan-terakhir">
+                                <div class="accordion-inner">
+                                    {{ form.pendidikan_terakhir.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.pendidikan_terakhir_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.pendidikan_terakhir }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member" href="#jurusan">
+                                    Jurusan
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="jurusan">
+                                <div class="accordion-inner">
+                                    {{ form.jurusan.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.jurusan_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.jurusan }}
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- accordion -->
+                </div> <!-- Span5 -->
+                
+                <div class="span5">
+                    <div class="accordion" id="choice-member2">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member2" href="#domisili">
+                                    Domisili
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="domisili">
+                                <div class="accordion-inner">
+                                    {{ form.domisili.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.domisili_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.domisili }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member2" href="#pekerjaan">
+                                    Pekerjaan
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="pekerjaan">
+                                <div class="accordion-inner">
+                                    {{ form.pekerjaan.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.pekerjaan_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.pekerjaan }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member2" href="#penerima-jamsos">
+                                    Penerima Jaminan Sosial
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="penerima-jamsos">
+                                <div class="accordion-inner">
+                                    {{ form.penerima_jaminan_sosial.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.penerima_jaminan_sosial_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.penerima_jaminan_sosial }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member2" href="#golongan-darah">
+                                    Golongan Darah
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="golongan-darah">
+                                <div class="accordion-inner">
+                                    {{ form.golongan_darah.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.golongan_darah_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.golongan_darah }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member2" href="#jadwal-ronda">
+                                    Jadwal Ronda
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="jadwal-ronda">
+                                <div class="accordion-inner">
+                                    {{ form.jadwal_ronda.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.jadwal_ronda_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.jadwal_ronda }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Usia - Status Sosial -->
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member2" href="#usia">
+                                    Usia
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="usia">
+                                <div class="accordion-inner">
+                                    {{ form.usia.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.usia_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.usia }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member2" href="#status-sosial">
+                                    Status Sosial
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="status-sosial">
+                                <div class="accordion-inner">
+                                    {{ form.status_sosial.errors }}
+                                    <p>Penghubung</p>
+                                    {{ form.status_sosial_rel }}
+                                    <p>Pilihan</p>
+                                    {{ form.status_sosial }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Wilayah -->
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse"
+                                   data-parent="#choice-member2" href="#wilayah">
+                                    Wilayah
+                                </a>
+                            </div>
+                            <div class="accordion-body collapse" id="wilayah">
+                                <div class="accordion-inner">
+                                    <p>Penghubung</p>
+                                    {{ form.wilayah_rel }}
+                                    
+                                    <p>Desa</p>
+                                    {{ form.desa.errors }}
+                                    {{ form.desa }}
+                                    
+                                    <p>Dusun</p>
+                                    {{ form.dusun.errors }}
+                                    {{ form.dusun }}
+                                    
+                                    <p>Kampung</p>
+                                    {{ form.kampung.errors }}
+                                    {{ form.kampung }}
+                                    
+                                    <p>RT</p>
+                                    {{ form.rt.errors }}
+                                    {{ form.rt }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div> <!-- Span5 -->
+            </div> <!-- Row -->
+            
+            <button type="submit" class="btn btn-primary">
+                <i class="icon-envelope icon-white"></i> Kirim
+            </button>
+            
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extrajs %}
+    <style>
+        #id_message {
+            width: 455px;
+        }
+        
+        select {
+            width: 210px;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+    </style>
+    
+    <script type="text/javascript" src="{{ STATIC_URL }}js/box.js"></script>
+    <script type="text/javascript">
+        $('.errorlist').attr('class', 'alert alert-error');
+        
+        $('#id_external').click(function(){
+            if($('#id_external').is(':checked')) {
+                $('.external').show();
+            } else {
+                $('.external').hide();
+            };
+        });
+        
+        $('#id_member').click(function(){
+            if($('#id_member').is(':checked')) {
+                $('.member').show();
+            } else {
+                $('.member').hide();
+            };
+        });
+        
+        $(document).ready(function() {
+            $('#id_message').limitCharacters();
+            $('.external,.member').hide();
+        });
+    </script>
+{% endblock %}

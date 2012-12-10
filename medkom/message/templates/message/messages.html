@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Messages List{% endblock %}
+{% block body %}
+    
+    <div class="row">
+        <div class="span5">
+            <form method="post" class="form-search pull-left mkform">
+                {% csrf_token %}
+                {{ form.q.errors }}
+                {{ form.q }}
+                <button type="submit" class="btn">Search</button>
+            </form>
+        </div>
+        
+        <div class="span5">
+            <div class="pagination pull-right custom-pagination">
+                <ul>
+                    <li class="disabled">
+                        <a href="#">
+                            Page {{ messages.number }} of
+                            {{ messages.paginator.num_pages }}
+                        </a>
+                    </li>
+                    {% if messages.has_previous %}
+                        <li>
+                            <a href="?page=1">
+                                <i class="icon-fast-backward"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page={{ messages.previous_page_number }}">
+                            <i class="icon-backward"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                    
+                    <li class="active"><a href="#">{{ messages.number }}</a></li>
+                    
+                    {% if messages.has_next %}
+                        <li>
+                            <a href="?page={{ messages.next_page_number }}">
+                                <i class="icon-forward"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page={{ messages.paginator.num_pages }}">
+                                <i class="icon-fast-forward"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div><!-- Paginator -->
+        </div>
+    </div>
+    <p></p>
+    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th style="font-size: large">
+                    Pesan
+                </th>
+            </tr>
+        </thead>
+        <tbody id="table-list">
+            {% if messages %}
+                {% load member_tags %}
+                {% for message in messages %}
+                    <tr onmouseout="this.className='tr-mouse-out'"
+                    onmouseover="this.className='tr-mouse-over'">
+                        <td  onclick="redirect('{{ message.id }}')">
+                            <div class="item-header">
+                                <strong>
+                                    {{message.sender}} {{message.sender|mask_sender}}
+                                </strong>
+                            </div>
+                            <div class="item-content">
+                                {{message.message}}
+                            </div>
+                            <div class="item-footer">
+                                <small>{{message.date|date:"d-M-Y H:i:s"}}</small>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">
+                        <p class="alert alert-info">
+                            Tidak ada pesan.
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    
+{% endblock %}
+{% block extrajs %}
+    <script type="text/javascript">
+        function redirect(page) {
+            location.href=page;
+        }
+    </script>
+{% endblock %}

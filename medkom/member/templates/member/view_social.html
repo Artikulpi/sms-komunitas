@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Lihat {{ social }}{% endblock %}
+{% block body %}
+    
+    <h4>{{ social.name }}</h4>
+    
+    <div class="tab-content">
+        <div class="tab-pane {% if not form.errors %}active{% endif %}" id="view">
+            
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td>Kategori</td>
+                        <td>{{ social.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Skor Min</td>
+                        <td>{{ social.score_min }}</td>
+                    </tr>
+                    <tr>
+                        <td>Skor Max</td>
+                        <td>{{ social.score_max }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <form method="post" action="delete/">
+                {% csrf_token %}
+                <input type="hidden" name="sos-id" value="{{ social.id }}">
+                <a href="#new" class="btn btn-primary" data-toggle="tab">Edit</a>
+                <button type="submit" class="btn btn-danger"
+                onClick="return confirmDelete()">Hapus</button>
+                <a href="../" class="btn btn-inverse">Kembali</a>
+            </form>
+            
+        </div>
+        
+        <div class="tab-pane {% if form.errors %}active{% endif %}" id="new">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <a href="#view" class="btn btn-inverse" data-toggle="tab">
+                    Batal</a>
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}
+{% block extrajs %}
+    <script type="text/javascript">
+        function confirmDelete() {
+            var agree=confirm("Yakin akan menghapus data ini?");
+            if(agree)
+                return true;
+            else
+                return false;
+        }
+    </script>
+{% endblock %}

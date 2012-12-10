@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ person }}{% endblock %}
+{% block body %}
+
+    <h3>{{person.nama_lengkap}}</h3>
+    
+    <div class="row">
+        <div class="span10 well">
+            <h4><strong>{{ person.nama_lengkap }} - {{ person.nama_panggilan}}</strong></h4>
+            <p>{{ person.family.alamat_desa }} - {{person.family.alamat_dusun}}</p>
+            <p>{{ person.family.alamat_kampung }} - RT {{person.family.alamat_rt}}</p>
+            <p><small>{{person.no_handphone}}</small></p>
+        </div>
+    </div>
+    
+    {% if person.no_handphone %}
+    <a href="#" onclick="redirect('{% url new_message %}{{person.no_handphone}}')"
+       class="btn btn-primary">
+        Kirim SMS
+    </a>
+    {% endif %}
+
+{% endblock %}
+{% block extrajs %}
+    <script type="text/javascript">
+        function redirect(page) {
+            location.href=page;
+        }
+    </script>
+{% endblock %}

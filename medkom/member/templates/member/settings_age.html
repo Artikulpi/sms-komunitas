@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Pengaturan Usia{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="span5">
+            <h4>Pengaturan Usia</h4>
+        </div>
+        <div class="span5">
+            <a data-toggle="tab" href="#new" class="btn btn-primary pull-right">
+                Tambah
+            </a>
+        </div>
+    </div>
+    
+    <div class="tab-content">
+        <div class="tab-pane {% if not form.errors %}active{% endif %}" id="view">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Kategori</th>
+                        <th>Dari Umur</th>
+                        <th>Sampai Umur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if ages %}
+                        {% for age in ages %}
+                            <tr onclick="redirect('{{age.id}}')"
+                            onmouseout="this.className='tr-mouse-out'"
+                            onmouseover="this.className='tr-mouse-over'">
+                                <td>{{ age.name }}</td>
+                                <td>{{ age.umur_min }}</td>
+                                <td>{{ age.umur_max }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="3">
+                                <p class="alert alert-info">
+                                    Belum ada data.
+                                </p>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane {% if form.errors %}active{% endif %}" id="new">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <a href="#view" class="btn" data-toggle="tab">
+                    Batal
+                </a>
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}
+{% block extrajs %}
+    <script type="text/javascript">
+        function redirect(page) {
+            location.href=page;
+        }
+    </script>
+{% endblock %}

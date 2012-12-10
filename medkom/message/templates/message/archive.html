@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Arsip Pengiriman Pesan{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="span5">
+        <h4>Arsip Pengiriman Pesan</h4>
+    </div>
+    <div class="span5">
+        <div class="pagination pull-right custom-pagination">
+            <ul>
+                <li class="disabled">
+                    <a href="#">
+                        Page {{ archives.number }} of
+                        {{ archives.paginator.num_pages }}
+                    </a>
+                </li>
+                {% if archives.has_previous %}
+                    <li>
+                        <a href="?page=1">
+                            <i class="icon-fast-backward"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?page={{ archives.previous_page_number }}">
+                        <i class="icon-backward"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                
+                <li class="active"><a href="#">{{ archives.number }}</a></li>
+                
+                {% if archives.has_next %}
+                    <li>
+                        <a href="?page={{ archives.next_page_number }}">
+                            <i class="icon-forward"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?page={{ archives.paginator.num_pages }}">
+                            <i class="icon-fast-forward"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div><!-- Paginator -->
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="span10">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Pesan</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for archive in archives %}
+                    <tr>
+                        <td>
+                            <div class="item-content">
+                                {{ archive.message }}
+                            </div>
+                            <div class="item-footer">
+                                <small>
+                                    Date: {{ archive.date|date:"d-M-Y H:i:s" }} | 
+                                    Ref: {{ archive.queue }} | 
+                                    Sent Count: {{ archive.persons.count }}
+                                </small>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
